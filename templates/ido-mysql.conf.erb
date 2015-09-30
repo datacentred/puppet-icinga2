@@ -1,0 +1,9 @@
+library "db_ido_mysql"
+
+object IdoMysqlConnection "ido-mysql" {
+  user = "<%= @username %>",
+  password = "<%= @password %>",
+  host = "localhost",
+  database = "<%= @database %>"
+}
+

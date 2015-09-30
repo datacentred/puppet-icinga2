@@ -1,0 +1,7 @@
+# File Managed by Puppet
+object ApiListener "api" {
+  cert_path = "<%= @cert %>"
+  key_path = "<%= @key %>"
+  ca_path = "<%= @ca %>"
+  accept_commands = <%= @accept_commands %>
+}
