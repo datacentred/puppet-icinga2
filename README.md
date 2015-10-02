@@ -64,7 +64,7 @@ include ::icinga2
 include ::icinga2::web
 include ::icinga2::features::api
 include ::icinga2::features::command
-include ::::icinga2::features::ido_mysql
+include ::icinga2::features::ido_mysql
 
 icinga::endpoint { 'master.example.com':
 }
