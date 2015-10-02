@@ -1,5 +1,7 @@
 # icinga2
 
+[![Build Status](https://travis-ci.org/spjmurray/puppet-icinga2.png?branch=master)](https://travis-ci.org/spjmurray/puppet-icinga2)
+
 #### Table of Contents
 
 1. [Overview](#overview)
