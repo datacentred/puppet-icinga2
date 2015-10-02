@@ -11,6 +11,12 @@ class icinga2::zones {
     mode   => '0644',
   }
 
+  concat::fragment { 'zones.conf header':
+    target  => '/etc/icinga2/zones.conf',
+    content => template('icinga2/header.erb'),
+    order   => '0',
+  }
+
   # Ensure packages are installed first and notify the service of changes
   Class['::icinga2::install'] ->
   Class['::icinga2::zones'] ~>
