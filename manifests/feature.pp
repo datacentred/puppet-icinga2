@@ -1,27 +1,29 @@
 # == Define: icinga2::feature
 #
-# Control whether a feature is enabled or not
+# Control whether a feature is enabled or not, optionally updating the
+# configuration file
 #
 define icinga2::feature (
-  $ensure = 'present',
+  $content = undef,
 ) {
 
-  if $ensure == 'present' {
+  if $content {
 
-    file { "/etc/icinga2/features-enabled/${name}.conf":
-      ensure => link,
-      target => "/etc/icinga2/features-available/${name}.conf",
-    } ~>
+    file { "/etc/icinga2/features-available/${name}.conf":
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => $content,
+    } ->
 
-    Class['::icinga2::service']
-
-  } else {
-
-    file { "/etc/icinga2/features-enabled/${name}.conf":
-      ensure => 'absent',
-    } ~>
-
-    Class['::icinga2::service']
+    File["/etc/icinga2/features-enabled/${name}.conf"]
 
   }
+
+  file { "/etc/icinga2/features-enabled/${name}.conf":
+    ensure => link,
+    target => "/etc/icinga2/features-available/${name}.conf",
+  }
+
 }

@@ -3,6 +3,10 @@ require 'spec_helper_acceptance'
 describe 'icinga' do
   context 'full install' do
     it 'provisions with no errors' do
+      # Create a CA and certificate for the api
+      shell('puppet cert generate $(hostname -f)')
+      # Add in an MPM module for mod_php
+      shell('echo "apache::mpm_module: \'prefork\'" > /var/lib/hiera/common.yaml')
       pp = <<-EOS
         Exec { path => '/bin:/usr/bin:/sbin:/usr/sbin' }
         include ::icinga2

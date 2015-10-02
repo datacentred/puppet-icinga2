@@ -8,6 +8,7 @@
 2. [Module Description - What the module does and why it is useful](#module-description)
 3. [Setup - The basics of getting started with icinga](#setup)
     * [What icinga affects](#what-icinga-affects)
+    * [Setup requirements](#setup-requirements)
     * [Beginning with icinga](#beginning-with-icinga)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
@@ -37,6 +38,11 @@ level master servers.
 * Installs a local mysql database if the ido_mysql feature is enabled
 * Installs an apache vhost for $::fqdn on port 80 if the web UI is installed
 * Installs a php.ini rule to control the timezone
+
+### Setup Requirements
+
+* Apache needs apache::mpm_module setting to _prefork_ or _itk_ in your hiera
+  configuration for it to correctly provision with mod_php
 
 ### Beginning with icinga
 

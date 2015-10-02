@@ -1,9 +1,13 @@
+/**
+ * File Managed by Puppet
+ */
+
 library "db_ido_mysql"
 
 object IdoMysqlConnection "ido-mysql" {
-  user = "<%= @username %>",
+  user = "<%= @user %>",
   password = "<%= @password %>",
-  host = "localhost",
+  host = "<%= @host %>",
   database = "<%= @database %>"
 }
 

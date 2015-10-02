@@ -1,0 +1,11 @@
+/**
+ * File Managed by Puppet
+ */
+
+library "compat"
+
+object ExternalCommandListener "command" {
+<% if @command_path -%>
+  command_path = "<%= @command_path %>"
+<% end -%>
+}

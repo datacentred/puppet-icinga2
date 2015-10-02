@@ -3,43 +3,37 @@
 # Configure and enable the IDO MySQL feature
 #
 class icinga2::features::ido_mysql (
-  $database = 'icinga',
-  $username = 'icinga',
+  $host = 'localhost',
+  $user = 'icinga',
   $password = 'icinga',
+  $database = 'icinga',
 ) {
 
   include ::mysql::server
 
-  Class['::icinga2::repo'] ->
+  mysql::db { $database:
+    user     => $user,
+    password => $password,
+  } ~>
 
   package { 'icinga2-ido-mysql':
     ensure => present,
   } ->
 
-  mysql::db { $database:
-    user     => $username,
-    password => $password,
-  } ~>
-
-  exec { '::icinga2::ido: import schema':
-    command     => "mysql ${db_name} < /usr/share/icinga2-ido-mysql/schema/mysql.sql",
+  exec { '::icinga2::ido_mysql: import schema':
+    command     => "mysql -u${user} -p${password} ${database} < /usr/share/icinga2-ido-mysql/schema/mysql.sql",
     logoutput   => true,
     refreshonly => true,
   } ->
 
-  file { '/etc/icinga2/features-available/ido-mysql.conf':
-    ensure  => file,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template('icinga2/ido-mysql.conf.erb'),
-  } ->
-
   icinga2::feature { 'ido-mysql':
-    ensure => present,
+    content => template('icinga2/ido-mysql.conf.erb'),
   }
 
-  # Restart the service on an update of the configuration file
-  File['/etc/icinga2/features-available/ido-mysql.conf'] ~> Class['::icinga2::service']
+  # Ensure repos and packages are installed before enabling, and notify
+  # the service of changes
+  Class['::icinga2::install'] ->
+  Class['::icinga2::features::ido_mysql'] ~>
+  Class['::icinga2::service']
 
 }
