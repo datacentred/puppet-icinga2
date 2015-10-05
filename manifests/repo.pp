@@ -20,26 +20,6 @@ class icinga2::repo {
       },
     }
 
-    # The current icingaweb 2.0.0-rc1 has a few issues with LDAP so use
-    # snapshots until it is GA'd
-    apt::source { 'icinga-snapshots':
-      location => 'http://packages.icinga.org/ubuntu',
-      release  => "icinga-${::lsbdistcodename}-snapshots",
-      repos    => 'main',
-    }
-
-    apt::pin { 'icinga2':
-      packages => 'icinga2*',
-      release  => "icinga-${::lsbdistcodename}",
-      priority => 500,
-    }
-
-    apt::pin { 'icingaweb2':
-      packages => 'icingaweb2*',
-      release  => "icinga-${::lsbdistcodename}-snapshots",
-      priority => 600,
-    }
-
   }
 
 }
