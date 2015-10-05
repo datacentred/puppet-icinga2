@@ -20,9 +20,10 @@ class icinga2::web::configure {
   } ->
 
   apache::vhost { $::fqdn:
-    docroot     => '/usr/share/icingaweb2/public',
-    port        => 80,
-    directories => {
+    docroot       => '/usr/share/icingaweb2/public',
+    port          => 80,
+    serveraliases => $aliases,
+    directories   => {
       'path'           => '/usr/share/icingaweb2/public',
       'options'        => [
         'SymLinksIfOwnerMatch',
@@ -47,7 +48,6 @@ class icinga2::web::configure {
           ],
         },
       ],
-      'serveraliases'  => $aliases,
     },
   }
 
