@@ -1,25 +1,25 @@
-# == Class: icinga2::zones
+# == Class: icinga2::config
 #
-# Define icinga2 zones
+# Define icinga2 config files
 #
-class icinga2::zones {
+define icinga2::config {
 
-  concat { '/etc/icinga2/zones.conf':
+  concat { $name:
     ensure => 'present',
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
   }
 
-  concat::fragment { 'zones.conf header':
-    target  => '/etc/icinga2/zones.conf',
+  concat::fragment { "${name} header":
+    target  => $name,
     content => template('icinga2/header.erb'),
     order   => '0',
   }
 
   # Ensure packages are installed first and notify the service of changes
   Class['::icinga2::install'] ->
-  Class['::icinga2::zones'] ~>
+  Icinga2::Config[$name] ~>
   Class['::icinga2::service']
 
 }
