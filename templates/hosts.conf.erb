@@ -1,0 +1,24 @@
+object Host "<%= @title %>" {
+
+<%# In repository mode we don't define any variables, checks are performed on the agent -%>
+<% if @repository -%>
+  import "satellite-host";
+<%# If the agent resides within this domain, check the connection -%>
+<% if @parent_domain == @domain -%>
+  check_command = "cluster-zone"
+<%# If the agent lives outside this domain delegate the check to the satellite -%>
+<% else -%>
+  check_command = "dummy"
+  zone = "<%= @parent_domain %>"
+<% end -%>
+<% else -%>
+  import "generic-host";
+
+  address = "<%= @address %>"
+<% @vars.each do |key, value| -%>
+
+  vars.<%= key %> = "<%= value %>"
+<% end -%>
+<% end -%>
+
+}
