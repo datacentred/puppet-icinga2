@@ -1,0 +1,10 @@
+
+object HostGroup "<%= @title %>" {
+  display_name = "<%= @display_name %>"
+<% if @groups -%>
+  groups = [ <%= @groups.map{|x| %Q/"#{x}"/}.join(', ') %> ]
+<% end -%>
+<% if @assign_where -%>
+  assign where <%= @assign_where %>
+<% end -%>
+}

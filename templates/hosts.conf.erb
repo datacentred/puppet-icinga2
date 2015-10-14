@@ -16,10 +16,11 @@ object Host "<%= @title %>" {
   import "generic-host";
 
   address = "<%= @address %>"
+<% end -%>
+<%# Host variables are defined for all types so we can define hostgroups -%>
 <% @vars.each do |key, value| -%>
 
   vars.<%= key %> = "<%= value %>"
-<% end -%>
 <% end -%>
 
 }
