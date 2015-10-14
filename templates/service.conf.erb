@@ -1,5 +1,5 @@
 
-object Service "<%= @check_command %>" {
+object Service "<%= @check_name_real %>" {
 <% if @repository -%>
   import "satellite-service"
   check_command = "dummy"
@@ -9,5 +9,8 @@ object Service "<%= @check_command %>" {
   import "generic-service"
   check_command = "<%= @check_command %>"
   host_name = "<%= @host_name %>"
+<% @vars.each do |name, value| -%>
+  vars.<%= name %> = "<%= value %>"
+<% end -%>
 <% end -%>
 }
