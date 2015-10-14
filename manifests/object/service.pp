@@ -11,7 +11,7 @@ define icinga2::object::service (
 ) {
 
   if $repository {
-    $target = "/etc/icinga2/repository.d/hosts/${host_name}/${title}.conf"
+    $target = "/etc/icinga2/repository.d/hosts/${host_name}/${check_command}.conf"
   } else {
     $target = '/etc/icinga2/conf.d/services.conf'
   }
@@ -20,7 +20,7 @@ define icinga2::object::service (
     icinga2::config { $target: }
   }
 
-  concat::fragment { "icinga2::object::service ${host_name} ${title}":
+  concat::fragment { "icinga2::object::service ${host_name} ${check_command}":
     target  => $target,
     content => template('icinga2/service.conf.erb'),
   }

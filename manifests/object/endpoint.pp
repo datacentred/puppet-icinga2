@@ -20,7 +20,7 @@ define icinga2::object::endpoint (
 
   concat::fragment { "icinga2::object::endpoint ${name}":
     target  => $target,
-    content => template('icinga2/endpoint.erb'),
+    content => template('icinga2/endpoint.conf.erb'),
     order   => '10',
   }
 

@@ -16,7 +16,18 @@ define icinga2::object::host (
 ) {
 
   if $repository {
+
     $target = "/etc/icinga2/repository.d/hosts/${title}.conf"
+
+    file { "/etc/icinga2/repository.d/hosts/${title}":
+      ensure  => directory,
+      owner   => 'nagios',
+      group   => 'nagios',
+      mode    => '0750',
+      recurse => true,
+      purge   => true,
+    }
+
   } else {
     $target = '/etc/icinga2/conf.d/hosts.conf'
   }

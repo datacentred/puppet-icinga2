@@ -11,9 +11,9 @@ define icinga2::config {
     mode   => '0644',
   }
 
-  concat::fragment { "${name} header":
+  concat::fragment { "icinga2::config ${name}":
     target  => $name,
-    content => template('icinga2/header.erb'),
+    content => template('icinga2/header.conf.erb'),
     order   => '0',
   }
 

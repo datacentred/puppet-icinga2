@@ -9,9 +9,12 @@ class icinga2::configure {
     '/etc/icinga2/repository.d/zones',
     '/etc/icinga2/repository.d/hosts',
   ] :
-    owner => 'nagios',
-    group => 'nagios',
-    mode  => '0750',
+    ensure  => directory,
+    owner   => 'nagios',
+    group   => 'nagios',
+    mode    => '0750',
+    recurse => true,
+    purge   => true,
   }
 
 }
