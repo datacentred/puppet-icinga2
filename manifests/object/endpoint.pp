@@ -1,8 +1,8 @@
-# == Define: icinga2::endpoint
+# == Define: icinga2::object::endpoint
 #
 # Defines an icinga2 endpoint
 #
-define icinga2::endpoint (
+define icinga2::object::endpoint (
   $host = undef,
   $port = undef,
   $repository = false,
@@ -18,7 +18,7 @@ define icinga2::endpoint (
     icinga2::config { $target: }
   }
 
-  concat::fragment { "endpoint-${name}":
+  concat::fragment { "icinga2::object::endpoint ${name}":
     target  => $target,
     content => template('icinga2/endpoint.erb'),
     order   => '10',

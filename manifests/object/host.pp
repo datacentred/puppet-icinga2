@@ -1,8 +1,8 @@
-# == Define: icinga2::host
+# == Define: icinga2::object::host
 #
 # Defines a host configuration
 #
-define icinga2::host (
+define icinga2::object::host (
   $display_name = $::fqdn,
   $address = $::ipaddress,
   $vars = {
@@ -11,7 +11,7 @@ define icinga2::host (
     'operatingsystem' => $::operatingsystem,
     'os' => $::kernel,
   },
-  $parent_domain = $::domain,
+  $parent_fqdn = $::domain,
   $repository = false,
 ) {
 
@@ -25,7 +25,7 @@ define icinga2::host (
     icinga2::config { $target: }
   }
 
-  concat::fragment { "host-${title}":
+  concat::fragment { "icinga2::object::host ${title}":
     target  => $target,
     content => template('icinga2/hosts.conf.erb'),
   }

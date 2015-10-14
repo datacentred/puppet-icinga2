@@ -1,0 +1,12 @@
+object Service "<%= @title %>" {
+<% if @repository -%>
+  import "satellite-service"
+  check_command = "dummy"
+  host_name = "<%= @host_name %>"
+  zone = "<%= @zone %>"
+<% else -%>
+  import "generic-service"
+  check_command = "<%= @check_command %>"
+  host_name = "<%= @host_name %>"
+<% end -%>
+}

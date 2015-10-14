@@ -1,8 +1,8 @@
-# == Define: icinga2::zone
+# == Define: icinga2::object::zone
 #
 # Defines an icinga2 zone
 #
-define icinga2::zone (
+define icinga2::object::zone (
   $endpoints = [],
   $parent = undef,
   $repository = false,
@@ -18,7 +18,7 @@ define icinga2::zone (
     icinga2::config { $target: }
   }
 
-  concat::fragment { "zone-${name}":
+  concat::fragment { "icinga2::object::zone ${name}":
     target  =>  $target,
     content => template('icinga2/zone.erb'),
     order   => '20',
