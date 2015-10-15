@@ -1,4 +1,4 @@
-# == Class: icinga2::object::service
+# == Define: icinga2::object::service
 #
 # Manages local and remote services
 #
