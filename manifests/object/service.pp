@@ -30,7 +30,8 @@ define icinga2::object::service (
 
   concat::fragment { "icinga2::object::service ${host_name} ${check_name_real}":
     target  => $target,
-    content => template('icinga2/service.conf.erb'),
+    content => template('icinga2/object/service.conf.erb'),
+    order   => '10',
   }
 
 }

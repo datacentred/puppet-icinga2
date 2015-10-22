@@ -1,0 +1,16 @@
+
+object NotificationCommand "<%= @title %>" {
+<% if @import -%>
+  import "<%= @import %>"
+<% end -%>
+<% if @command -%>
+  command = "<%= @command %>"
+<% end -%>
+<% if @env -%>
+  env = {
+<% @env.each do |key, value| -%>
+    <%= key %> = "<%= value %>"
+<% end -%>
+  }
+<% end -%>
+}

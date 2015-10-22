@@ -1,0 +1,21 @@
+
+object User "<%= @title %>" {
+<% if @display_name -%>
+  display_name = "<%= @display_name %>"
+<% end -%>
+<% if @groups -%>
+  groups = [ <%= @groups.map{|x| %Q/"#{x}"/}.join(', ') %> ]
+<% end -%>
+<% if @email -%>
+  email = "<%= @email -%>"
+<% end -%>
+<% if @pager -%>
+  pager = "<%= @pager -%>"
+<% end -%>
+<% if @states -%>
+  states = [ <%= @states.join(', ') %> ]
+<% end -%>
+<% if @types -%>
+  types = [ <%= @types.join(', ') %> ]
+<% end -%>
+}

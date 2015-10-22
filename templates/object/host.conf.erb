@@ -1,6 +1,5 @@
 
 object Host "<%= @title %>" {
-
 <%# In repository mode we don't define any variables, checks are performed on the agent -%>
 <% if @repository -%>
   import "satellite-host";
@@ -14,13 +13,14 @@ object Host "<%= @title %>" {
 <% end -%>
 <% else -%>
   import "generic-host";
-
   address = "<%= @address %>"
 <% end -%>
 <%# Host variables are defined for all types so we can define hostgroups -%>
 <% @vars.each do |key, value| -%>
-
+<% if value == true || value == false || value.is_a?(Integer) -%>
+  vars.<%= key %> = <%= value %>
+<% else -%>
   vars.<%= key %> = "<%= value %>"
 <% end -%>
-
+<% end -%>
 }

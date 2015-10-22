@@ -9,8 +9,12 @@ object Service "<%= @check_name_real %>" {
   import "generic-service"
   check_command = "<%= @check_command %>"
   host_name = "<%= @host_name %>"
-<% @vars.each do |name, value| -%>
-  vars.<%= name %> = "<%= value %>"
+<% @vars.each do |key, value| -%>
+<% if value == true || value == false || value.is_a?(Integer) -%>
+  vars.<%= key %> = <%= value %>
+<% else -%>
+  vars.<%= key %> = "<%= value %>"
+<% end -%>
 <% end -%>
 <% end -%>
 }

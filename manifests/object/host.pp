@@ -5,12 +5,7 @@
 define icinga2::object::host (
   $display_name = $::fqdn,
   $address = $::ipaddress,
-  $vars = {
-    'architecture' => $::architecture,
-    'lsbdistcodename' => $::lsbdistcodename,
-    'operatingsystem' => $::operatingsystem,
-    'os' => $::kernel,
-  },
+  $vars = {},
   $parent_fqdn = $::domain,
   $repository = false,
 ) {
@@ -38,7 +33,8 @@ define icinga2::object::host (
 
   concat::fragment { "icinga2::object::host ${title}":
     target  => $target,
-    content => template('icinga2/hosts.conf.erb'),
+    content => template('icinga2/object/host.conf.erb'),
+    order   => '10',
   }
 
 }

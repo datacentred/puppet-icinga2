@@ -8,13 +8,16 @@ define icinga2::object::hostgroup (
   $assign_where = undef,
 ) {
 
-  if ! defined(Icinga2::Config['/etc/icinga2/conf.d/groups.conf']) {
-    icinga2::config { '/etc/icinga2/conf.d/groups.conf': }
+  $target = '/etc/icinga2/conf.d/groups.conf'
+
+  if ! defined(Icinga2::Config[$target]) {
+    icinga2::config { $target: }
   }
 
   concat::fragment { "icinga2::object::hostgroup ${title}":
-    target  => '/etc/icinga2/conf.d/groups.conf',
-    content => template('icinga2/hostgroup.conf.erb'),
+    target  => $target,
+    content => template('icinga2/object/hostgroup.conf.erb'),
+    order   => '10',
   }
 
 }

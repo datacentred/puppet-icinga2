@@ -20,7 +20,7 @@ define icinga2::object::zone (
 
   concat::fragment { "icinga2::object::zone ${name}":
     target  =>  $target,
-    content => template('icinga2/zone.conf.erb'),
+    content => template('icinga2/object/zone.conf.erb'),
     order   => '20',
   }
 

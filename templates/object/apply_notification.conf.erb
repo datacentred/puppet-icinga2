@@ -1,0 +1,21 @@
+
+apply Notification "<%= @title %>" to <%= @object %> {
+<% if @command -%>
+  command = "<%= @command %>"
+<% end -%>
+<% if @states -%>
+  states = [ <%= @states.join(', ') %> ]
+<% end -%>
+<% if @types -%>
+  types = [ <%= @types.join(', ') %> ]
+<% end -%>
+<% if @period -%>
+  period = "<%= @period %>"
+<% end -%>
+<% if @users -%>
+  users = [ <%= @users.map{|x| %Q/"#{x}"/}.join(', ') %> ]
+<% end -%>
+<% if @assign_where -%>
+  assign where <%= @assign_where %>
+<% end -%>
+}

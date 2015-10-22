@@ -8,13 +8,16 @@ define icinga2::object::servicegroup (
   $assign_where = undef,
 ) {
 
-  if ! defined(Icinga2::Config['/etc/icinga2/conf.d/groups.conf']) {
-    icinga2::config { '/etc/icinga2/conf.d/groups.conf': }
+  $target = '/etc/icinga2/conf.d/groups.conf'
+
+  if ! defined(Icinga2::Config[$target]) {
+    icinga2::config { $target: }
   }
 
   concat::fragment { "icinga2::object::servicegroup ${title}":
-    target  => '/etc/icinga2/conf.d/groups.conf',
-    content => template('icinga2/servicegroup.conf.erb'),
+    target  => $target,
+    content => template('icinga2/object/servicegroup.conf.erb'),
+    order   => '20',
   }
 
 }
