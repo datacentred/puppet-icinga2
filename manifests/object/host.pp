@@ -3,15 +3,15 @@
 # Defines a host configuration
 #
 define icinga2::object::host (
-  $display_name = $::fqdn,
+  $import = undef,
+  $check_command = undef,
   $address = $::ipaddress,
   $vars = {},
-  $parent_fqdn = $::domain,
+  $icon_image = undef,
   $repository = false,
 ) {
 
   if $repository {
-
     $target = "/etc/icinga2/repository.d/hosts/${title}.conf"
 
     file { "/etc/icinga2/repository.d/hosts/${title}":
@@ -22,7 +22,6 @@ define icinga2::object::host (
       recurse => true,
       purge   => true,
     }
-
   } else {
     $target = '/etc/icinga2/conf.d/hosts.conf'
   }

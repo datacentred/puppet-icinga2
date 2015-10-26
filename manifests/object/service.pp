@@ -3,8 +3,8 @@
 # Manages local and remote services
 #
 define icinga2::object::service (
+  $check_name,
   $check_command,
-  $check_name = undef,
   $import = 'generic-service',
   $vars = {},
   $host_name = $::fqdn,
@@ -12,14 +12,8 @@ define icinga2::object::service (
   $repository = false,
 ) {
 
-  if $check_name {
-    $check_name_real = $check_name
-  } else {
-    $check_name_real = $check_command
-  }
-
   if $repository {
-    $target = "/etc/icinga2/repository.d/hosts/${host_name}/${check_name_real}.conf"
+    $target = "/etc/icinga2/repository.d/hosts/${host_name}/${check_name}.conf"
   } else {
     $target = '/etc/icinga2/conf.d/services.conf'
   }
@@ -28,7 +22,7 @@ define icinga2::object::service (
     icinga2::config { $target: }
   }
 
-  concat::fragment { "icinga2::object::service ${host_name} ${check_name_real}":
+  concat::fragment { "icinga2::object::service ${title}":
     target  => $target,
     content => template('icinga2/object/service.conf.erb'),
     order   => '10',

@@ -1,26 +1,19 @@
 
 object Host "<%= @title %>" {
-<%# In repository mode we don't define any variables, checks are performed on the agent -%>
-<% if @repository -%>
-  import "satellite-host";
-<%# If the agent is directly connected to this zone, check the connection -%>
-<% if @parent_fqdn == @fqdn -%>
-  check_command = "cluster-zone"
-<%# If the agent is not directly connected to this zone delegate the check to the satellite -%>
-<% else -%>
-  check_command = "dummy"
-  zone = "<%= @parent_fqdn %>"
+<% if @check_command -%>
+  check_command = "<%= @check_command %>"
 <% end -%>
-<% else -%>
-  import "generic-host";
+<% if @address -%>
   address = "<%= @address %>"
 <% end -%>
-<%# Host variables are defined for all types so we can define hostgroups -%>
 <% @vars.each do |key, value| -%>
 <% if value == true || value == false || value.is_a?(Integer) -%>
   vars.<%= key %> = <%= value %>
 <% else -%>
   vars.<%= key %> = "<%= value %>"
 <% end -%>
+<% end -%>
+<% if @icon_image -%>
+  icon_image = "<%= @icon_image %>"
 <% end -%>
 }
