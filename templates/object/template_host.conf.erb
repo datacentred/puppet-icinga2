@@ -1,0 +1,15 @@
+
+template Host "<%= @title %>" {
+<% if @max_check_attempts -%>
+  max_check_attempts = <%= @max_check_attempts %>
+<% end -%>
+<% if @check_interval -%>
+  check_interval = <%= @check_interval %>
+<% end -%>
+<% if @retry_interval -%>
+  retry_interval = <%= @retry_interval %>
+<% end -%>
+<% if @check_command -%>
+  check_command = "<%= @check_command %>"
+<% end -%>
+}

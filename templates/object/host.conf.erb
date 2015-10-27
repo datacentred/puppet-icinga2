@@ -1,5 +1,8 @@
 
 object Host "<%= @title %>" {
+<% if @import -%>
+  import "<%= @import %>"
+<% end -%>
 <% if @check_command -%>
   check_command = "<%= @check_command %>"
 <% end -%>
