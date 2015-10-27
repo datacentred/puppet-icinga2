@@ -3,10 +3,10 @@
 # Manages local and remote services
 #
 define icinga2::object::service (
-  $check_name,
-  $check_command,
-  $import = 'generic-service',
-  $vars = {},
+  $check_name = undef,
+  $import = undef,
+  $check_command = undef,
+  $vars = undef,
   $host_name = $::fqdn,
   $zone = $::fqdn,
   $repository = false,

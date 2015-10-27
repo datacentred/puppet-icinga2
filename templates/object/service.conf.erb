@@ -1,20 +1,24 @@
 
 object Service "<%= @check_name %>" {
-<% if @repository -%>
-  import "satellite-service"
-  check_command = "dummy"
-  host_name = "<%= @host_name %>"
-  zone = "<%= @zone %>"
-<% else -%>
-  import "generic-service"
+<% if @import -%>
+  import "<%= @import %>"
+<% end -%>
+<% if @check_command -%>
   check_command = "<%= @check_command %>"
+<% end -%>
+<% if @host_name -%>
   host_name = "<%= @host_name %>"
-<% @vars.each do |key, value| -%>
-<% if value == true || value == false || value.is_a?(Integer) -%>
+<% end -%>
+<% if @zone -%>
+  zone = "<%= @zone %>"
+<% end -%>
+<% if @vars -%>
+  <%- @vars.each do |key, value| -%>
+    <%- if value == true || value == false || value.is_a?(Integer) -%>
   vars.<%= key %> = <%= value %>
-<% else -%>
+    <%- else -%>
   vars.<%= key %> = "<%= value %>"
-<% end -%>
-<% end -%>
+    <%- end -%>
+  <%- end -%>
 <% end -%>
 }
