@@ -16,6 +16,9 @@ object Host "<%= @title %>" {
   vars.<%= key %> = "<%= value %>"
 <% end -%>
 <% end -%>
+<% if @zone -%>
+  zone = "<%= @zone %>"
+<% end -%>
 <% if @icon_image -%>
   icon_image = "<%= @icon_image %>"
 <% end -%>

@@ -8,6 +8,7 @@ define icinga2::object::host (
   $address = $::ipaddress,
   $vars = {},
   $icon_image = undef,
+  $zone = undef,
   $repository = false,
 ) {
 
