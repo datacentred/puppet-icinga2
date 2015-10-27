@@ -8,12 +8,9 @@ class icinga2::install {
 
   $packages = [
     'icinga2',
-    'nagios-plugins',
-    'nagios-plugins-extra',
-    'nagios-plugins-contrib',
-    'nagios-plugins-openstack',
   ]
 
   ensure_packages($packages)
 
+  ensure_packages($::icinga2::plugins)
 }

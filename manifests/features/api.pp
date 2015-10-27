@@ -10,9 +10,9 @@ class icinga2::features::api (
 ) {
 
   # We are using puppet's CA infrastructure allow access to the certs and keys
-  exec { 'icinga2::server::configure: usermod nagios':
-    command => 'usermod -a -G puppet nagios',
-    unless  => 'id nagios | grep puppet',
+  exec { "icinga2::server::configure: usermod ${::icinga2::user}":
+    command => "usermod -a -G puppet ${::icinga2::user}",
+    unless  => "id ${::icinga2::user} | grep puppet",
   }
 
   icinga2::feature { 'api':

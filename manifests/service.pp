@@ -6,6 +6,7 @@ class icinga2::service {
 
   service { 'icinga2':
     ensure => running,
+    enable => true,
   }
 
 }

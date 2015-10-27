@@ -49,7 +49,9 @@
 #
 class icinga2 (
   $repo_manage = true,
-) {
+  $plugins = $::icinga2::params::plugins,
+  $user = $::icinga2::params::user,
+) inherits icinga2::params {
 
   include ::icinga2::repo
   include ::icinga2::install
