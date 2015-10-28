@@ -1,0 +1,15 @@
+---
+HOSTS:
+  puppet:
+    roles:
+      - master
+      - centos
+    platform: el-7-amd64
+    hypervisor: openstack
+    flavor: dc1.1x1.20
+    image: 'CentOS 7.0'
+    user: centos
+    distmoduledir: /etc/puppet/modules
+CONFIG:
+  type: foss
+  openstack_network: beaker

@@ -1,9 +1,10 @@
 rvm:
 - 1.9.3
-- 2.1.2
 script:
 - bundle exec rake validate
-- BEAKER_set=openstack BEAKER_debug=yes bundle exec rake beaker
+- BEAKER_set=openstack-ubuntu BEAKER_debug=yes bundle exec rake beaker
+- BEAKER_set=openstack-fedora BEAKER_debug=yes bundle exec rake beaker
+- BEAKER_set=openstack-centos BEAKER_debug=yes bundle exec rake beaker
 env:
   global:
   - secure: h0pI6i1flYh4cw7RQFQsUyHF4fybddgS2m1ZYls5hY5MfxgReu1TeWaBkVUkvyrmD5mJz2vIpW0D9a7UrU+bKRigtc0nZR/KU1baqsjy+hwV4/JI0wWO1fODgUXJXNIHwuQ5hlyzUkwd1bb7/v88+bHpaxdH6eMjd6twJJoIVSCjpnvcgERRrgHt0xlJ+vM59LULAxEl4IdY90qj6RVpsr+tVy5RgQbO+v+PWlblFOluxQcePTUsVEbtGniiGXqogZx4ZXxmD0wsqvbX2vxkkvjSlDs831O9QttLkgwnjE3OvlB7CtlJ8WqwAmCvZA9+UXFpZjXWOUCqM+k9G17BWUo3unyHwoagfD1PRdxusywG/EpK/rxOtQWZFOZFuACAEWMLxtfqTC3cEENLqBYA0HReGUq2suJgIMYAVVZ1wk7veFqRID0ErkbyKxgNFO7MkasOOamyxp5ZX3tXXDqlaDTF3ME2ruxBw/t12LEmgN7LnmJ3YdsTt1jvrIazSkaYok3hjuEAvpin9ASN0AfBarw+pUFHpPXrQv67a10fMf7tR0BEMh0ghL0mirzpvAwCBORZl2IMg5Y/1fyG8g5A9Q6MhB7UMotSpRMAtTNnOJY524pPR7zIRmumNdDz0ikdmi+P92ugi1b6Q0cWnzTvGAxqu98+yU/jy7osd3k8Lsk=
