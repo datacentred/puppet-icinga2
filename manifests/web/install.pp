@@ -6,12 +6,10 @@ class icinga2::web::install {
 
   $packages = [
     'icingaweb2',
-    'php5-gd',
-    'php5-imagick',
-    'php5-intl',
-    'php5-ldap',
   ]
 
   ensure_packages($packages)
+
+  ensure_packages($::icinga2::webdeps)
 
 }

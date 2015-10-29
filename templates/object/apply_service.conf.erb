@@ -1,0 +1,21 @@
+
+apply Service "<%= @check_name %>" {
+<% if @import -%>
+  import "<%= @import %>"
+<% end -%>
+<% if @check_command -%>
+  check_command = "<%= @check_command %>"
+<% end -%>
+<% if @vars -%>
+  <%- @vars.each do |key, value| -%>
+    <%- if value == true || value == false || value.is_a?(Integer) -%>
+  vars.<%= key %> = <%= value %>
+    <%- else -%>
+  vars.<%= key %> = "<%= value %>"
+    <%- end -%>
+  <%- end -%>
+<% end -%>
+<% if @assign_where -%>
+  assign where <%= @assign_where %>
+<% end -%>
+}
