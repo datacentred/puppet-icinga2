@@ -4,8 +4,9 @@
 #
 define icinga2::object::host (
   $import = undef,
+  $display_name = undef,
   $check_command = undef,
-  $address = $::ipaddress,
+  $address = undef,
   $vars = {},
   $icon_image = undef,
   $zone = undef,

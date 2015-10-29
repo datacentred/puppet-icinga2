@@ -3,6 +3,9 @@ object Host "<%= @title %>" {
 <% if @import -%>
   import "<%= @import %>"
 <% end -%>
+<% if @display_name -%>
+  display_name = "<%= @display_name %>"
+<% end -%>
 <% if @check_command -%>
   check_command = "<%= @check_command %>"
 <% end -%>
