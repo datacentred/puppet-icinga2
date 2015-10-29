@@ -10,24 +10,26 @@ class icinga2::params {
         'nagios-plugins-contrib',
         'nagios-plugins-openstack',
       ]
-      $webdeps = [
+      $web_package_deps = [
         'php5-gd',
         'php5-imagick',
         'php5-intl',
         'php5-ldap',
       ]
+      $web_php_ini = '/files/etc/php5/apache2/php.ini'
       $user = 'nagios'
     }
     'RedHat': {
       $plugins = [
         'nagios-plugins-all',
       ]
-      $webdeps = [
+      $web_package_deps = [
         'php-gd',
         'php-intl',
         'php-ldap',
         'php-pecl-imagick',
       ]
+      $web_php_ini = undef
       $user = 'icinga'
     }
   }

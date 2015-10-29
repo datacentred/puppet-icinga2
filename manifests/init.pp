@@ -50,7 +50,8 @@
 class icinga2 (
   $repo_manage = true,
   $plugins = $::icinga2::params::plugins,
-  $webdeps = $::icinga2::params::webdeps,
+  $web_package_deps = $::icinga2::params::web_package_deps,
+  $web_php_ini = $::icinga2::params::web_php_ini,
   $user = $::icinga2::params::user,
 ) inherits icinga2::params {
 

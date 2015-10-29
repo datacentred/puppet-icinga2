@@ -10,6 +10,6 @@ class icinga2::web::install {
 
   ensure_packages($packages)
 
-  ensure_packages($::icinga2::webdeps)
+  ensure_packages($::icinga2::web_package_deps)
 
 }

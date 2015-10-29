@@ -15,7 +15,7 @@ class icinga2::web::configure {
   # Execute this before the VirtualHost is created as this will implicitly
   # restart apache and pick up the changes
   augeas { 'php.ini':
-    context => '/files/etc/php5/apache2/php.ini',
+    context => $::icinga2::web_php_ini,
     changes => "set Date/date.timezone ${timezone}",
   } ->
 
