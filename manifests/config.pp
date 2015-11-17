@@ -4,6 +4,19 @@
 #
 define icinga2::config {
 
+  $dir = dirname($title)
+
+  if ! defined(File[$dir]) {
+    file { $dir:
+      ensure  => 'directory',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      recurse => true,
+      purge   => true,
+    }
+  }
+
   concat { $name:
     ensure => 'present',
     owner  => 'root',
