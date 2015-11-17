@@ -6,9 +6,8 @@ define icinga2::object::hostgroup (
   $display_name,
   $groups = undef,
   $assign_where = undef,
+  $target = '/etc/icinga2/conf.d/groups.conf',
 ) {
-
-  $target = '/etc/icinga2/conf.d/groups.conf'
 
   if ! defined(Icinga2::Config[$target]) {
     icinga2::config { $target: }

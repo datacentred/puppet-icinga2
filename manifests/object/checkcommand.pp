@@ -6,9 +6,8 @@ define icinga2::object::checkcommand (
   $command,
   $arguments = undef,
   $vars = undef,
+  $target = '/etc/icinga2/conf.d/checks.conf',
 ) {
-
-  $target = '/etc/icinga2/conf.d/checks.conf'
 
   if !defined(Icinga2::Config[$target]) {
     icinga2::config { $target: }

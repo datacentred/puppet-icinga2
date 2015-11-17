@@ -3,16 +3,11 @@
 # Defines an icinga2 zone
 #
 define icinga2::object::zone (
-  $endpoints = [],
+  $endpoints = undef,
   $parent = undef,
-  $repository = false,
+  $global = undef,
+  $target = '/etc/icinga2/zones.conf',
 ) {
-
-  if $repository {
-    $target = "/etc/icinga2/repository.d/zones/${name}.conf"
-  } else {
-    $target = '/etc/icinga2/zones.conf'
-  }
 
   if ! defined(Icinga2::Config[$target]) {
     icinga2::config { $target: }

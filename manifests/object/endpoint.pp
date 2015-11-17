@@ -5,14 +5,8 @@
 define icinga2::object::endpoint (
   $host = undef,
   $port = undef,
-  $repository = false,
+  $target = '/etc/icinga2/zones.conf',
 ) {
-
-  if $repository {
-    $target = "/etc/icinga2/repository.d/endpoints/${name}.conf"
-  } else {
-    $target = '/etc/icinga2/zones.conf'
-  }
 
   if ! defined(Icinga2::Config[$target]) {
     icinga2::config { $target: }

@@ -6,9 +6,8 @@ define icinga2::object::notificationcommand (
   $import = undef,
   $command = undef,
   $env = {},
+  $target = '/etc/icinga2/conf.d/notifications.conf',
 ) {
-
-  $target = '/etc/icinga2/conf.d/notifications.conf'
 
   if !defined(Icinga2::Config[$target]) {
     icinga2::config { $target: }

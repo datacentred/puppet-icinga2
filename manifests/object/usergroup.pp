@@ -4,9 +4,8 @@
 #
 define icinga2::object::usergroup (
   $display_name,
+  $target = '/etc/icinga2/conf.d/users.conf',
 ) {
-
-  $target = '/etc/icinga2/conf.d/users.conf'
 
   if ! defined(Icinga2::Config[$target]) {
     icinga2::config { $target: }

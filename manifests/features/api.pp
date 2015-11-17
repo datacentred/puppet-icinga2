@@ -7,6 +7,7 @@ class icinga2::features::api (
   $key_path = "/var/lib/puppet/ssl/private_keys/${::fqdn}.pem",
   $ca_path = '/var/lib/puppet/ssl/certs/ca.pem',
   $accept_commands = false,
+  $accept_config = false,
 ) {
 
   # We are using puppet's CA infrastructure allow access to the certs and keys

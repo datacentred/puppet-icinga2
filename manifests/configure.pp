@@ -6,9 +6,7 @@ class icinga2::configure {
 
   file { [
     '/etc/icinga2/conf.d',
-    '/etc/icinga2/repository.d/endpoints',
-    '/etc/icinga2/repository.d/zones',
-    '/etc/icinga2/repository.d/hosts',
+    '/etc/icinga2/zones.d',
   ] :
     ensure  => directory,
     owner   => 'root',
