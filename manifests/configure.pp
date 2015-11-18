@@ -14,11 +14,23 @@ class icinga2::configure {
     '/etc/icinga2',
     '/etc/icinga2/conf.d',
     '/etc/icinga2/zones.d',
+    '/etc/icinga2/scripts',
+    '/etc/icinga2/features-enabled',
   ] :
     ensure  => directory,
     mode    => '0755',
     recurse => true,
     purge   => true,
+    force   => true,
+  }
+
+  file { [
+    '/etc/icinga2/pki',
+    '/etc/icinga2/repository.d',
+    '/etc/icinga2/features-available',
+  ] :
+    ensure  => directory,
+    mode    => '0755',
   }
 
   file { '/etc/icinga2/init.conf':
