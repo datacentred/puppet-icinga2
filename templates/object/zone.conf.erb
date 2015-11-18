@@ -1,6 +1,6 @@
 
 object Zone "<%= @name %>" {
-<% if @pndpoints -%>
+<% if @endpoints -%>
   endpoints = [ <%= Array(@endpoints).map{|x| %Q/"#{x}"/}.join(', ') %> ]
 <% end -%>
 <% if @parent -%>
