@@ -16,7 +16,11 @@ apply Service "<%= @title %>" {
   <%- end -%>
 <% end -%>
 <% if @zone -%>
+  <%- if /^host\./.match(@zone) -%>
+  zone = <%= @zone %>
+  <%- else -%>
   zone = "<%= @zone %>"
+  <%- end -%>
 <% end -%>
 <% if @assign_where -%>
   assign where <%= @assign_where %>
