@@ -60,7 +60,9 @@ class icinga2 (
   include ::icinga2::configure
   include ::icinga2::service
 
-  Class['::icinga2::repo'] -> Class['::icinga2::install']
-  Class['::icinga2::install'] -> Class['::icinga2::configure']
+  Class['::icinga2::repo'] ->
+  Class['::icinga2::install'] ->
+  Class['::icinga2::configure'] ~>
+  Class['::icinga2::service']
 
 }
