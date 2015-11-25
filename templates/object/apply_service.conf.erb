@@ -8,7 +8,7 @@ apply Service "<%= @title %>" {
 <% end -%>
 <% if @vars -%>
   <%- @vars.each do |key, value| -%>
-    <%- if value == true || value == false || value.is_a?(Integer) -%>
+    <%- if value == true || value == false || value.is_a?(Integer) || /^host\./.match(@zone) -%>
   vars.<%= key %> = <%= value %>
     <%- else -%>
   vars.<%= key %> = "<%= value %>"
