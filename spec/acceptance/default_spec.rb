@@ -9,11 +9,20 @@ describe 'icinga' do
       shell('echo "apache::mpm_module: \'prefork\'" > /var/lib/hiera/common.yaml')
       pp = <<-EOS
         Exec { path => '/bin:/usr/bin:/sbin:/usr/sbin' }
+
         include ::icinga2
         include ::icinga2::web
         include ::icinga2::features::api
         include ::icinga2::features::command
         include ::icinga2::features::ido_mysql
+
+        icinga2::object::endpoint { $::fqdn: }
+
+        icinga2::object::zone { $::fqdn:
+          endpoints => [ $::fqdn ],
+        }
+
+        icinga2::object::host { $::fqdn: }
       EOS
       # Check for clean provisioning and idempotency
       apply_manifest(pp, :catch_failures => true)
