@@ -18,6 +18,10 @@ class icinga2::params {
       ]
       $web_php_ini = '/files/etc/php5/apache2/php.ini'
       $user = 'nagios'
+      $group = 'nagios'
+      $plugin_dir = '/usr/lib/nagios/plugins'
+      $manubulon_plugin_dir = '/usr/lib/nagios/plugins'
+      $plugin_contrib_dir = '/usr/lib/nagios/plugins'
     }
     'RedHat': {
       $plugins = [
@@ -31,6 +35,10 @@ class icinga2::params {
       ]
       $web_php_ini = undef
       $user = 'icinga'
+      $group = 'icinga'
+      $plugin_dir = '/usr/lib64/nagios/plugins'
+      $manubulon_plugin_dir = '/usr/lib64/nagios/plugins'
+      $plugin_contrib_dir = '/usr/lib64/nagios/plugins'
     }
   }
 

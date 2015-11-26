@@ -1,0 +1,13 @@
+---
+HOSTS:
+  puppet:
+    roles:
+      - master
+      - centos
+    platform: el-7-amd64
+    distmoduledir: /etc/puppet/modules
+    box: puppetlabs/centos-7.0-64-nocm
+    box_url: https://vagrantcloud.com/puppetlabs/boxes/centos-7.0-64-nocm
+    hypervisor: vagrant
+CONFIG:
+  type: foss

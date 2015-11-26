@@ -4,6 +4,12 @@
 #
 class icinga2::configure {
 
+  $user = $::icinga2::user
+  $group = $::icinga2::group
+  $plugin_dir = $::icinga2::plugin_dir
+  $manubulon_plugin_dir = $::icinga2::manubulon_plugin_dir
+  $plugin_contrib_dir = $::icinga2::plugin_contrib_dir
+
   File {
     owner => 'root',
     group => 'root',

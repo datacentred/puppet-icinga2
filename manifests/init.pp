@@ -53,6 +53,10 @@ class icinga2 (
   $web_package_deps = $::icinga2::params::web_package_deps,
   $web_php_ini = $::icinga2::params::web_php_ini,
   $user = $::icinga2::params::user,
+  $group = $::icinga2::params::group,
+  $plugin_dir = $::icinga2::params::plugin_dir,
+  $manubulon_plugin_dir = $::icinga2::params::manubulon_plugin_dir,
+  $plugin_contrib_dir = $::icinga2::params::plugin_contrib_dir,
 ) inherits icinga2::params {
 
   include ::icinga2::repo
