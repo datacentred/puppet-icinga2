@@ -22,7 +22,10 @@ describe 'icinga' do
           endpoints => [ $::fqdn ],
         }
 
-        icinga2::object::host { $::fqdn: }
+        icinga2::object::host { $::fqdn:
+          check_command => 'hostalive',
+          address       => $::ipaddress,
+        }
       EOS
       # Check for clean provisioning and idempotency
       apply_manifest(pp, :catch_failures => true)
