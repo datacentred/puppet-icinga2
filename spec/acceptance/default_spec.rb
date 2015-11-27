@@ -26,6 +26,27 @@ describe 'icinga' do
           check_command => 'hostalive',
           address       => $::ipaddress,
         }
+
+        icinga2::object::checkcommand { 'fake':
+          command   => '"/usr/bin/true"',
+          arguments => {
+            '-a'    => '$fake_a$',
+            '-b'    => {
+              'set_if' => '$fake_b$',
+            },
+          },
+          vars      => {
+            'fake_b' => false,
+          }
+        }
+
+        icinga2::object::service { 'fake':
+          check_command => 'fake',
+          vars          => {
+            'fake_a' => 'fake',
+            'fake_b' => true,
+          },
+        }
       EOS
       # Check for clean provisioning and idempotency
       apply_manifest(pp, :catch_failures => true)

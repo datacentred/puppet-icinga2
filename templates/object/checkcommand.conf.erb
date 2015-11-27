@@ -6,11 +6,11 @@ object CheckCommand "<%= @title %>" {
   arguments = {
   <%- @arguments.each do |key, value| -%>
     <%- if value.is_a?(Hash) -%>
-    "<%= key %> = {"
+    "<%= key %>" = {
       <%- value.each do |argkey, argvalue| -%>
-      "<%= argkey %>" = "<%= argvalue %>"
+      <%= argkey %> = "<%= argvalue %>"
       <%- end -%>
-    "}"
+    }
     <%- else -%>
     "<%= key %>" = "<%= value %>"
     <%- end -%>
