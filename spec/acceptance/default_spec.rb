@@ -28,7 +28,10 @@ describe 'icinga' do
         }
 
         icinga2::object::checkcommand { 'fake':
-          command   => '"/usr/bin/true"',
+          command   => [
+            '"sudo"',
+            '"/usr/bin/true"',
+          ],
           arguments => {
             '-a'    => '$fake_a$',
             '-b'    => {

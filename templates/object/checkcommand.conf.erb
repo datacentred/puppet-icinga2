@@ -1,7 +1,7 @@
 
 object CheckCommand "<%= @title %>" {
   import "plugin-check-command"
-  command = [ <%= @command %> ]
+  command = [ <%= Array(@command).join(', ') %> ]
 <% if @arguments -%>
   arguments = {
   <%- @arguments.each do |key, value| -%>
