@@ -25,6 +25,15 @@ describe 'icinga' do
         icinga2::object::host { $::fqdn:
           check_command => 'hostalive',
           address       => $::ipaddress,
+          vars          => {
+            'kernel'           => $::kernel,
+            'interfaces["eth0"]' => {
+              'ipaddress'  => $::ipaddress_eth0,
+              'macaddress' => $::macaddress_eth0,
+              'network'    => $::network_eth0,
+              'netmask'    => $::netmask_eth0,
+            },
+          },
         }
 
         icinga2::object::checkcommand { 'fake':
