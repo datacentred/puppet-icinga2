@@ -1,0 +1,28 @@
+
+apply Service "<%= @title %>" for (<%= @key %> => <%= @value %> in <%= @hash %>) {
+<% if @import -%>
+  import "<%= @import %>"
+<% end -%>
+<% if @check_command -%>
+  check_command = "<%= @check_command %>"
+<% end -%>
+<% if @vars -%>
+  <%- @vars.each do |key, value| -%>
+    <%- if value == true || value == false || value.is_a?(Integer) || /^(host|#{@value})\./.match(value) -%>
+  vars.<%= key %> = <%= value %>
+    <%- else -%>
+  vars.<%= key %> = "<%= value %>"
+    <%- end -%>
+  <%- end -%>
+<% end -%>
+<% if @zone -%>
+  <%- if /^host\./.match(@zone) -%>
+  zone = <%= @zone %>
+  <%- else -%>
+  zone = "<%= @zone %>"
+  <%- end -%>
+<% end -%>
+<% if @assign_where -%>
+  assign where <%= @assign_where %>
+<% end -%>
+}

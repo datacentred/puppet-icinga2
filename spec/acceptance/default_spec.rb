@@ -59,6 +59,17 @@ describe 'icinga' do
             'fake_b' => true,
           },
         }
+
+        icinga2::object::apply_service_for { 'ping':
+          key           => 'interface',
+          value         => 'attributes',
+          hash          => 'host.vars.interfaces',
+          check_command => 'ping',
+          vars          => {
+            'ping_address' => 'attributes.ipaddress',
+          },
+          assign_where  => 'attributes.network == "192.168.22.0"',
+        }
       EOS
       # Check for clean provisioning and idempotency
       apply_manifest(pp, :catch_failures => true)
