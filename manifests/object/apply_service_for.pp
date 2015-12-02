@@ -8,6 +8,7 @@ define icinga2::object::apply_service_for (
   $hash,
   $import = undef,
   $check_command = undef,
+  $display_name = undef,
   $vars = undef,
   $zone = undef,
   $assign_where = undef,

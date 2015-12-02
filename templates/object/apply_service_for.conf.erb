@@ -6,6 +6,9 @@ apply Service "<%= @title %>" for (<%= @key %> => <%= @value %> in <%= @hash %>)
 <% if @check_command -%>
   check_command = "<%= @check_command %>"
 <% end -%>
+<% if @display_name -%>
+  display_name = "<%= @display_name %>"
+<% end -%>
 <% if @vars -%>
   <%- @vars.each do |key, value| -%>
     <%- if value == true || value == false || value.is_a?(Integer) || /^(host|#{@value})\./.match(value) -%>
