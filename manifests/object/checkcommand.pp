@@ -4,6 +4,7 @@
 #
 define icinga2::object::checkcommand (
   $command,
+  $timeout = undef,
   $arguments = undef,
   $vars = undef,
   $target = '/etc/icinga2/conf.d/checks.conf',

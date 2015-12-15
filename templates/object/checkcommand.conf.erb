@@ -2,6 +2,9 @@
 object CheckCommand "<%= @title %>" {
   import "plugin-check-command"
   command = [ <%= Array(@command).join(', ') %> ]
+<% if @timeout -%>
+  timeout = <%= @timeout %>
+<% end -%>
 <% if @arguments -%>
   arguments = {
   <%- @arguments.each do |key, value| -%>
