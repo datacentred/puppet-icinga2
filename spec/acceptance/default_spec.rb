@@ -69,6 +69,7 @@ describe 'icinga' do
             'ping_address' => 'attributes.ipaddress',
           },
           assign_where  => 'attributes.network == "192.168.22.0"',
+          ignore_where  => 'host.vars.kernel != "Linux"',
         }
       EOS
       # Check for clean provisioning and idempotency

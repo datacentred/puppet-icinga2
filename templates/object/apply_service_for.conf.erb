@@ -28,4 +28,7 @@ apply Service "<%= @title %>" for (<%= @key %> => <%= @value %> in <%= @hash %>)
 <% if @assign_where -%>
   assign where <%= @assign_where %>
 <% end -%>
+<% if @ignore_where -%>
+  ignore where <%= @ignore_where %>
+<% end -%>
 }

@@ -8,6 +8,7 @@ define icinga2::object::apply_service (
   $vars = undef,
   $zone = undef,
   $assign_where = undef,
+  $ignore_where = undef,
   $target = '/etc/icinga2/conf.d/services.conf',
 ) {
 
