@@ -8,19 +8,11 @@ apply Service "<%= @title %>" {
 <% end -%>
 <% if @vars -%>
   <%- @vars.each do |key, value| -%>
-    <%- if value == true || value == false || value.is_a?(Integer) || /^host\./.match(value) -%>
-  vars.<%= key %> = <%= value %>
-    <%- else -%>
-  vars.<%= key %> = "<%= value %>"
-    <%- end -%>
+  vars.<%= key %> = <%= scope.function_icinga2_config_value([value]) %>
   <%- end -%>
 <% end -%>
 <% if @zone -%>
-  <%- if /^host\./.match(@zone) -%>
-  zone = <%= @zone %>
-  <%- else -%>
-  zone = "<%= @zone %>"
-  <%- end -%>
+  zone = <%= scope.function_icinga2_config_value([@zone]) %>
 <% end -%>
 <% if @assign_where -%>
   assign where <%= @assign_where %>

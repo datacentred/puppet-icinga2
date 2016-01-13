@@ -7,27 +7,15 @@ apply Service "<%= @title %>" for (<%= @key %> => <%= @value %> in <%= @hash %>)
   check_command = "<%= @check_command %>"
 <% end -%>
 <% if @display_name -%>
-  <%- if @display_name.include? '"' -%>
-  display_name = <%= @display_name %>
-  <%- else -%>
-  display_name = "<%= @display_name %>"
-  <%- end -%>
+  display_name = <%= scope.function_icinga2_config_value([@display_name]) %>
 <% end -%>
 <% if @vars -%>
   <%- @vars.each do |key, value| -%>
-    <%- if value == true || value == false || value.is_a?(Integer) || /^(host|#{@value})\./.match(value) -%>
-  vars.<%= key %> = <%= value %>
-    <%- else -%>
-  vars.<%= key %> = "<%= value %>"
-    <%- end -%>
+  vars.<%= key %> = <%= scope.function_icinga2_config_value([value, @key, @value]) %>
   <%- end -%>
 <% end -%>
 <% if @zone -%>
-  <%- if /^host\./.match(@zone) -%>
-  zone = <%= @zone %>
-  <%- else -%>
-  zone = "<%= @zone %>"
-  <%- end -%>
+  zone = <%= scope.function_icinga2_config_value([@zone]) %>
 <% end -%>
 <% if @assign_where -%>
   assign where <%= @assign_where %>

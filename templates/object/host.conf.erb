@@ -13,17 +13,7 @@ object Host "<%= @title %>" {
   address = "<%= @address %>"
 <% end -%>
 <% @vars.each do |key, value| -%>
-<% if value == true || value == false || value.is_a?(Integer) -%>
-  vars.<%= key %> = <%= value %>
-<% elsif value.is_a?(Hash) -%>
-  vars.<%= key %> = {
-  <%- value.each do |k1, v1| -%>
-    <%= k1 %> = "<%= v1 %>"
-  <%- end -%>
-  }
-<% else -%>
-  vars.<%= key %> = "<%= value %>"
-<% end -%>
+  vars.<%= key %> = <%= scope.function_icinga2_config_value([value]) %>
 <% end -%>
 <% if @zone -%>
   zone = "<%= @zone %>"

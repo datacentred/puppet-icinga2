@@ -14,11 +14,7 @@ object Service "<%= @title %>" {
 <% end -%>
 <% if @vars -%>
   <%- @vars.each do |key, value| -%>
-    <%- if value == true || value == false || value.is_a?(Integer) -%>
-  vars.<%= key %> = <%= value %>
-    <%- else -%>
-  vars.<%= key %> = "<%= value %>"
-    <%- end -%>
+  vars.<%= key %> = <%= scope.function_icinga2_config_value([value]) %>
   <%- end -%>
 <% end -%>
 }

@@ -6,27 +6,11 @@ object CheckCommand "<%= @title %>" {
   timeout = <%= @timeout %>
 <% end -%>
 <% if @arguments -%>
-  arguments = {
-  <%- @arguments.each do |key, value| -%>
-    <%- if value.is_a?(Hash) -%>
-    "<%= key %>" = {
-      <%- value.each do |argkey, argvalue| -%>
-      <%= argkey %> = "<%= argvalue %>"
-      <%- end -%>
-    }
-    <%- else -%>
-    "<%= key %>" = "<%= value %>"
-    <%- end -%>
-  <%- end -%>
-  }
+  arguments = <%= scope.function_icinga2_config_value([@arguments]) %>
 <% end -%>
 <% if @vars -%>
   <%- @vars.each do |key, value| -%>
-    <%- if value == true || value == false || value.is_a?(Integer) -%>
-  vars.<%= key %> = <%= value %>
-    <%- else -%>
-  vars.<%= key %> = "<%= value %>"
-    <%- end -%>
+  vars.<%= key %> = <%= scope.function_icinga2_config_value([value]) %>
   <%- end -%>
 <% end -%>
 }
