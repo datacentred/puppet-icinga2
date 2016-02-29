@@ -4,7 +4,7 @@ describe 'icinga' do
   context 'full install' do
     it 'provisions with no errors' do
       # Create a CA and certificate for the api
-      shell('puppet cert generate $(hostname -f)')
+      shell('puppet cert generate $(facter fqdn)')
       # Add in an MPM module for mod_php
       shell('echo "apache::mpm_module: \'prefork\'" > /var/lib/hiera/common.yaml')
       pp = <<-EOS
@@ -28,10 +28,8 @@ describe 'icinga' do
           vars          => {
             'kernel'           => $::kernel,
             'interfaces["eth0"]' => {
-              'ipaddress'  => $::ipaddress_eth0,
-              'macaddress' => $::macaddress_eth0,
-              'network'    => $::network_eth0,
-              'netmask'    => $::netmask_eth0,
+              'ipaddress'  => $::ipaddress,
+              'netmask'    => $::netmask,
             },
           },
         }
@@ -68,7 +66,7 @@ describe 'icinga' do
           vars          => {
             'ping_address' => 'attributes.ipaddress',
           },
-          assign_where  => 'attributes.network == "192.168.22.0"',
+          assign_where  => 'true',
           ignore_where  => 'host.vars.kernel != "Linux"',
         }
       EOS

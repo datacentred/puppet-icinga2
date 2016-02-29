@@ -51,4 +51,7 @@ class icinga2::web::configure {
     },
   }
 
+  # Fixes a idempotency race condition whereby apache is installed and
+  # purges conf.d before the icingaweb2 package installs its configuration
+  Class['::icinga2::web::install'] -> Class['::apache']
 }
