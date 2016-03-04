@@ -33,7 +33,7 @@ def _icinga2_config_value(value, locals, depth=1)
   elsif value.start_with?('host.', 'service.', 'user.')
     value
   # Apply for local variables
-  elsif value.start_with?(*locals.map{|x| "#{x}."})
+  elsif value.start_with?(*locals)
     value
   # String literal
   else
