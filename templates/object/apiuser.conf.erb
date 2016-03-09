@@ -1,0 +1,10 @@
+
+object ApiUser "<%= @title %>" {
+<%- if @password -%>
+  password = "<%= @password %>"
+<%- end -%>
+<%- if @client_cn -%>
+  client_cn = "<%= @client_cn %>"
+<%- end -%>
+  permissions = [ <%= @permissions.map{|x| %Q/"#{x}"/}.join(', ') %> ]
+}
