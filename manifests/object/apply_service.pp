@@ -5,6 +5,7 @@
 define icinga2::object::apply_service (
   $import = undef,
   $check_command = undef,
+  $display_name = undef,
   $vars = undef,
   $zone = undef,
   $assign_where = undef,

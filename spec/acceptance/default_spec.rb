@@ -58,6 +58,12 @@ describe 'icinga2' do
       },
     }
 
+    icinga2::object::apply_service { 'fake2':
+      check_command => 'fake',
+      display_name  => 'overridden name',
+      assign_where  => true,
+    }
+
     icinga2::object::apply_service_for { 'ping':
       key           => 'interface',
       value         => 'attributes',
@@ -66,7 +72,7 @@ describe 'icinga2' do
       vars          => {
         'ping_address' => 'attributes.ipaddress',
       },
-      assign_where  => 'true',
+      assign_where  => true,
       ignore_where  => 'host.vars.kernel != "Linux"',
     }
 

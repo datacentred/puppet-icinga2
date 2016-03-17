@@ -6,6 +6,9 @@ apply Service "<%= @title %>" {
 <% if @check_command -%>
   check_command = "<%= @check_command %>"
 <% end -%>
+<% if @display_name -%>
+  display_name = <%= scope.function_icinga2_config_value([@display_name]) %>
+<% end -%>
 <% if @vars -%>
   <%- @vars.each do |key, value| -%>
   vars.<%= key %> = <%= scope.function_icinga2_config_value([value]) %>
