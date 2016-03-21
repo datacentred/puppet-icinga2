@@ -17,6 +17,9 @@ def _icinga2_config_value(value, locals, depth=1)
       key = %Q/"#{key}"/ if key.include?('-')
       "#{a}  #{'  ' * depth} #{key} = #{_icinga2_config_value(x.last, locals, depth + 1).to_s}\n"
     end + ("  " * depth) + "}"
+  # Arrays - 1D ONLY
+  elsif value.is_a?(Array)
+    '[' + value.collect { |v| _icinga2_config_value(v, locals, 0).to_s }.join(',') + ']'
   # Numeric literals
   elsif value.is_a?(Integer) or value.is_a?(Float)
     value

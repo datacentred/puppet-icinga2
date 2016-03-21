@@ -40,8 +40,11 @@ describe 'icinga2' do
         '"/usr/bin/true"',
       ],
       arguments => {
-        '-a'    => '$fake_a$',
-        '-b'    => {
+        '-a' => {
+          'value'      => '$fake_a$',
+          'repeat_key' => true,
+        },
+        '-b' => {
           'set_if' => '$fake_b$',
         },
       },
@@ -53,7 +56,7 @@ describe 'icinga2' do
     icinga2::object::service { 'fake':
       check_command => 'fake',
       vars          => {
-        'fake_a' => 'fake',
+        'fake_a' => [ 'fake', 'fake2', 'fake3' ],
         'fake_b' => true,
       },
     }
