@@ -5,7 +5,9 @@ describe 'icinga2' do
   # Create a CA and certificate for the api
   shell('puppet cert generate $(facter fqdn)')
   # Add in an MPM module for mod_php
-  shell('echo "apache::mpm_module: \'prefork\'" > /var/lib/hiera/common.yaml')
+  shell('echo "apache::mpm_module: \'prefork\'" >> /var/lib/hiera/common.yaml')
+  # Setup networking so `hostname -f` works as expected
+  shell('echo -e "127.0.0.1 localhost\n$(facter ipaddress) $(facter fqdn) $(facter hostname)" > /etc/hosts')
   # All in one configuration
   pp = <<-EOS
     Exec { path => '/bin:/usr/bin:/sbin:/usr/sbin' }
@@ -13,16 +15,31 @@ describe 'icinga2' do
     include ::icinga2
     include ::icinga2::web
     include ::icinga2::features::api
+    include ::icinga2::features::checker
     include ::icinga2::features::command
     include ::icinga2::features::ido_mysql
 
     icinga2::object::endpoint { $::fqdn: }
 
     icinga2::object::zone { $::fqdn:
-      endpoints => [ $::fqdn ],
+      endpoints => [ $::fqdn],
+    }
+
+    icinga2::object::template_host { 'generic-host':
+      max_check_attempts => 3,
+      check_interval     => '1m',
+      retry_interval     => '30s',
+      check_command      => 'hostalive',
+    }
+
+    icinga2::object::template_service { 'generic-service':
+      max_check_attempts => 5,
+      check_interval     => '1m',
+      retry_interval     => '30s',
     }
 
     icinga2::object::host { $::fqdn:
+      import        => 'generic-host',
       check_command => 'hostalive',
       address       => $::ipaddress,
       vars          => {
@@ -36,14 +53,10 @@ describe 'icinga2' do
 
     icinga2::object::checkcommand { 'fake':
       command   => [
-        '"sudo"',
-        '"/usr/bin/true"',
+        '"/bin/true"',
       ],
       arguments => {
-        '-a' => {
-          'value'      => '$fake_a$',
-          'repeat_key' => true,
-        },
+        '-a' => '$fake_a$',
         '-b' => {
           'set_if' => '$fake_b$',
         },
@@ -53,21 +66,20 @@ describe 'icinga2' do
       }
     }
 
-    icinga2::object::service { 'fake':
+    icinga2::object::apply_service { 'fake2':
+      import        => 'generic-service',
       check_command => 'fake',
+      display_name  => 'overridden name',
       vars          => {
         'fake_a' => [ 'fake', 'fake2', 'fake3' ],
         'fake_b' => true,
       },
-    }
-
-    icinga2::object::apply_service { 'fake2':
-      check_command => 'fake',
-      display_name  => 'overridden name',
+      zone          => $::fqdn,
       assign_where  => true,
     }
 
     icinga2::object::apply_service_for { 'ping':
+      import        => 'generic-service',
       key           => 'interface',
       value         => 'attributes',
       hash          => 'host.vars.interfaces',
@@ -75,6 +87,7 @@ describe 'icinga2' do
       vars          => {
         'ping_address' => 'attributes.ipaddress',
       },
+      zone          => $::fqdn,
       assign_where  => true,
       ignore_where  => 'host.vars.kernel != "Linux"',
     }

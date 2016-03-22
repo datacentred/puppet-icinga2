@@ -12,6 +12,19 @@ class icinga2::web::configure {
   $timezone = $::icinga2::web::timezone
   $aliases = $::icinga2::web::aliases
 
+  # Fix up permissions so icingaweb2 works
+  file { '/etc/icingaweb2/modules':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'icingaweb2',
+    mode   => '2770',
+  }
+
+  # Allow apache to run as the icingaweb2 group
+  exec { "usermod -a -G icingaweb2 ${::icinga2::www_user}":
+    unless => "id ${::icinga2::www_user} | grep icingaweb2",
+  } ->
+
   # Execute this before the VirtualHost is created as this will implicitly
   # restart apache and pick up the changes
   augeas { 'php.ini':
@@ -50,6 +63,9 @@ class icinga2::web::configure {
       ],
     },
   }
+
+  # Ensure apache and the web user is installed before modifying the groups
+  Class['::apache'] -> Class['icinga2::web::configure']
 
   # Fixes a idempotency race condition whereby apache is installed and
   # purges conf.d before the icingaweb2 package installs its configuration

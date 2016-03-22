@@ -57,6 +57,7 @@ class icinga2 (
   $plugin_dir = $::icinga2::params::plugin_dir,
   $manubulon_plugin_dir = $::icinga2::params::manubulon_plugin_dir,
   $plugin_contrib_dir = $::icinga2::params::plugin_contrib_dir,
+  $www_user = $::icinga2::params::www_user,
 ) inherits icinga2::params {
 
   include ::icinga2::repo

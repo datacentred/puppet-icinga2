@@ -18,7 +18,7 @@ class icinga2::features::ido_mysql (
 
   package { 'icinga2-ido-mysql':
     ensure => present,
-  } ->
+  } ~>
 
   exec { '::icinga2::ido_mysql: import schema':
     command     => "mysql -u${user} -p${password} ${database} < /usr/share/icinga2-ido-mysql/schema/mysql.sql",

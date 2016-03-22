@@ -22,6 +22,7 @@ class icinga2::params {
       $plugin_dir = '/usr/lib/nagios/plugins'
       $manubulon_plugin_dir = '/usr/lib/nagios/plugins'
       $plugin_contrib_dir = '/usr/lib/nagios/plugins'
+      $www_user = 'www-data'
     }
     'RedHat': {
       $plugins = [
@@ -39,6 +40,7 @@ class icinga2::params {
       $plugin_dir = '/usr/lib64/nagios/plugins'
       $manubulon_plugin_dir = '/usr/lib64/nagios/plugins'
       $plugin_contrib_dir = '/usr/lib64/nagios/plugins'
+      $www_user = 'apache'
     }
   }
 

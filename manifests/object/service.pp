@@ -6,8 +6,8 @@ define icinga2::object::service (
   $import = undef,
   $check_command = undef,
   $vars = undef,
-  $host_name = $::fqdn,
-  $zone = $::fqdn,
+  $host_name = undef,
+  $zone = undef,
   $target = '/etc/icinga2/conf.d/services.conf',
 ) {
 
