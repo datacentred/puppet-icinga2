@@ -17,6 +17,7 @@ describe 'icinga2' do
     include ::icinga2::features::api
     include ::icinga2::features::checker
     include ::icinga2::features::command
+    include ::icinga2::features::graphitewriter
     include ::icinga2::features::ido_mysql
 
     icinga2::object::endpoint { $::fqdn: }
