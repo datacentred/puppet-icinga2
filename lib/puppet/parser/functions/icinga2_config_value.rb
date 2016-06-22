@@ -38,6 +38,9 @@ def _icinga2_config_value(value, locals, depth=1)
   # Apply for local variables
   elsif value.start_with?(*locals)
     value
+  # Object accessor functions
+  elsif value.start_with?('get_')
+    value
   # String literal
   else
     "\"#{value}\""
