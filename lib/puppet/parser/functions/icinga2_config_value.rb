@@ -8,8 +8,11 @@
 # double quotation.
 #
 def _icinga2_config_value(value, locals, depth=1)
+  # Error
+  if value.nil?
+    "\"nil\""
   # Hashes
-  if value.is_a?(Hash)
+  elsif value.is_a?(Hash)
     "{\n" + value.sort_by{|k,v|k}.inject('') do |a, x|
       key = x.first
       # If the key features illegal characters (e.g. '-d' in check command
