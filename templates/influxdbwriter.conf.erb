@@ -25,14 +25,20 @@ object InfluxdbWriter "influxdb" {
   ssl_key = <%= @ssl_key %>
 <% end -%>
   host_template = {
-  <%- @host_template.each do |k,v| -%>
-    <%= k %> = "<%= v %>"
-  <%- end -%>
+    measurement = "<%= @host_template['measurement'] %>"
+    tags = {
+      <%- @host_template['tags'].each do |k,v| -%>
+      <%= k %> = "<%= v %>"
+      <%- end -%>
+    }
   }
   service_template = {
-  <%- @service_template.each do |k,v| -%>
-    <%= k %> = "<%= v %>"
-  <%- end -%>
+    measurement = "<%= @service_template['measurement'] %>"
+    tags = {
+      <%- @service_template['tags'].each do |k,v| -%>
+      <%= k %> = "<%= v %>"
+      <%- end -%>
+    }
   }
 <% if @enable_send_thresholds -%>
   enable_send_thresholds = true
