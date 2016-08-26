@@ -9,6 +9,7 @@ class icinga2::configure {
   $plugin_dir = $::icinga2::plugin_dir
   $manubulon_plugin_dir = $::icinga2::manubulon_plugin_dir
   $plugin_contrib_dir = $::icinga2::plugin_contrib_dir
+  $constants = $::icinga2::constants
 
   File {
     owner => 'root',
@@ -35,8 +36,8 @@ class icinga2::configure {
     '/etc/icinga2/repository.d',
     '/etc/icinga2/features-available',
   ] :
-    ensure  => directory,
-    mode    => '0755',
+    ensure => directory,
+    mode   => '0755',
   }
 
   file { '/etc/icinga2/init.conf':

@@ -26,3 +26,9 @@ const ZoneName = NodeName
 
 /* Secret key for remote node tickets */
 const TicketSalt = ""
+<% unless @constants.empty? -%>
+<% @constants.each do |k, v| -%>
+
+const <%= k %> = "<%= v %>"
+<% end -%>
+<% end -%>
