@@ -2,6 +2,8 @@
 #
 class icinga2::params {
 
+  $ensure = 'present'
+
   case $::osfamily {
     'Debian': {
       $plugins = [
@@ -41,6 +43,9 @@ class icinga2::params {
       $manubulon_plugin_dir = '/usr/lib64/nagios/plugins'
       $plugin_contrib_dir = '/usr/lib64/nagios/plugins'
       $www_user = 'apache'
+    }
+    default: {
+      fail('Only Debian and RedHat OS families are supported at this time')
     }
   }
 
