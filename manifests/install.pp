@@ -10,7 +10,7 @@ class icinga2::install {
     'icinga2',
   ]
 
-  ensure_packages($packages)
+  ensure_packages($packages, { ensure => $::icinga2::ensure })
 
   ensure_packages($::icinga2::plugins)
 }

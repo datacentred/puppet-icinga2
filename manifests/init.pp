@@ -48,6 +48,7 @@
 # Copyright 2015 Simon Murray, unless otherwise noted.
 #
 class icinga2 (
+  $ensure = $::icinga2::params::ensure,
   $repo_manage = true,
   $plugins = $::icinga2::params::plugins,
   $web_package_deps = $::icinga2::params::web_package_deps,
